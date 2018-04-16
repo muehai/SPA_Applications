@@ -6,4 +6,6 @@ As you remember I have developed a rest-api application in my previous project c
 
 Short descriptions for the Clien and server projects.
 1. I created a client side application in the ClienApp folder usin Angular 4. Here, I have created a client side model inside app/component folder which contains the properties for server side model.
-2. For server side application I created MSControll and UserControll classes to inject our repositories as a dependency,so that we can peform the CRUD operations by invoke the the repositories layer functions.
+2. For server side application I created MSControll and UserControll classes to inject our repositories as a dependency, so that we can peform the CRUD operations by invoke the the repositories layer functions.
+
+3. Building a front-end application, I used Angular 4 and Boostrap.  
