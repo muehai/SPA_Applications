@@ -1,8 +1,16 @@
-# Rest_Api
- The purpose of creating this "Rest_Api" application was to demonistrate the .net core 2 platform components to
- build Rest-Api application. What does this application? The application is designed to help manage different meetings. 
- When I decided to build this rest-api solution it shuld be cross-platform, rest architecture principles, separation of concerns principle
- and optimal designed. To achieve all this services I explored the Asp.Net Core 2 and Entity Framework Core 2. For validation I applied 
- FluentValidation library. The appliction folders structure are self explanatory. 
- How to create the Models and Repositories just follow the class libray structures. The rest-api solution will use a single page application (SPA) to render and create dynamic website, but for the moment the SPA solution is not implemented.     
+# SPA-Application
+A Single Page Application(SPA) has became the most cutting-Edge technology to build webapplication using javascript framework with angularJS. I was eager to build a spa-application in asp.net core 2 and angularJS frameworks. SPA gives the website users a fluid experience because of the page reload automatically for each generated events.
+As you remember I have developed a rest-api application in my previous project called (Rest_API). I have used the same application for database layer, domain models and the repositories. What I added is the SPA-Project into Rest_API project.
+
+Short descriptions for the Clien and server projects.
+1. I created a client side application in the ClienApp folder usin Angular 4. Here, I have created a client side model inside app/component folder which contains the properties for server side model.
+2. For server side application I created MSControll and UserControll classes to inject our repositories as a dependency,so that we can peform the CRUD operations by invoke the the repositories layer functions.
+
+
+
+
+
+
+ 
+     
 
