@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>MeetingSchemas list</title>
+</head>
+<body>
+
+    <button class="btn btn-primary" type="button" *ngIf="meetingSchemas">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span class="badge">{{totalItems}} </span>
+    </button>
+
+    <!--Tables-->
+    <h2>MeetingSchema Details</h2>
+    <div [@flyInOut]="'in'">
+
+        <hr />
+        <table class="table table-hover">
+            <thead>
+                <tr>
+
+                    <th><i class="fa fa-text-width fa-2x" aria-hidden="true"></i>Title</th>
+                    <th><i class="fa fa-user fa-2x" aria-hidden="true"></i> Creator</th>
+                    <th><i class="fa fa-paragraph fa-2x" aria-hidden="true"></i>Description</th>
+                    <th><i class="fa fa-calendar fa-2x" aria-hidden="true"></i>Location</th>
+                    <th><i class="fa fa-calendar fa-2x" aria-hidden="true"></i>Time Start</th>
+                    <th><i class="fa fa-calendar fa-2x" aria-hidden="true"></i>Time End</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ms of meetingSchema">
+                    <td>{{ms.Title}} </td>
+                    <td>{{ms.Creator}} </td>
+                    <td>{{ms.Description}}</td>
+                    <td>{{ms.Location}}</td>
+                    <td>{{ms.TimeStart}}</td>
+                    <td>{{ms.TimeEnd }}</td>
+                    <td>
+                        <button class="btn btn-primary" (click)="DisplayMeetingSchemaDetailsById(ms.Id)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>Details
+                        </button>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" [routerLink]="['/meetingSchemas',ms.Id]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>
+                    </td>
+
+                    <td>
+                        <button class="btn btn-danger" (click)="RemoveMeetingSchemasObj(ms)">
+                            <i class="fa fa-trash-alt" aria-hidden="true"></i>Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Model dialog -->
+    <div class="modal modal-dialog modal-lg" *ngIf="IsSelectedMeetingSchemaLoaded">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2> {{meetingsSchemaDetails.Title}}</h2> MeetinSchemas details
+            </div>
+            <div class="modal-body">
+                <form ngNoForm method="post">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="control-label"><i class="fa fa-user" aria-hidden="true"></i>Creator</label>
+                                <input type="text" class="form-control" [(ngModel)]="meetingsSchemaDetails.Creator" disabled />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label"><i class="fa fa-text-width" aria-hidden="true"></i>Title</label>
+                                <input type="text" class="form-control" [(ngModel)]="meetingSchemaDetails.Title" disabled />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label"><i class="fa fa-paragraph" aria-hidden="true"></i>Description</label>
+                                <input type="text" class="form-control" [(ngModel)]="meetingSchemaDetails.Description" disabled />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-xs-6">
+                                <label class="control-label"><i class="fa fa-calendar-o" aria-hidden="true"></i>Time Start</label>
+                                <input type="text" class="form-control" [(ngModel)]="meetingSchemaDetails.TimeStart" disabled />
+
+                                <div class="col col-xs-6">
+                                    <label class="control-label">
+                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>Time End
+                                        <input type="text" class="form-control" [(ngModel)]="meetingsSchemaDetails.TimeEnd" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-4">
+                                <label class="control-label"><i class="fa fa-map-marker" aria-hidden="true"></i>Location</label>
+                                <input type="text" class="form-control" [(ngModel)]="meetingSchemaDetails.Location" />
+                            </div>
+                            <div class="col col-md-4 selectContainer">
+                                <label class="control-label"><i class="fa fa-spinner" aria-haspopup="true"></i> Status </label>
+                                <input type="text" class="form-control" [(ngModel)]="meetingsSchemaDetails.Statuses" />
+                            </div>
+                            <div class="col col-md-4 selectContainer">
+                                <label class="control-label"><i class="fa fa-tag" aria-hidden="true"></i>Types</label>
+                                <input type="text" class="form-control" [(ngModel)]="meetingSchemaDetails.Types" />
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <!--Panels -->
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Participants</div>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th><i class="fa fa-user" aria-hidden="true"></i>Name</th>
+                                    <th><i class="fa fa-graduation-cap" aria-hidden="true"></i>Profession</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let parts of meetingsSchemaDetails.Participants">
+                                    <td [style.align]="center"> parts.Name </td>
+                                    <td [style.align]="center"> Parts.Profession</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

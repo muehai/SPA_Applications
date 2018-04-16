@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Users</title>
+</head>
+<body>
+
+    <h2>Users details</h2>
+    <hr />
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th><i class="fa fa-text-width fa-2x" aria-hidden="true"></i>Name</th>
+                <th><i class="fa fa-user fa-2x" aria-hidden="true"></i>Avatar</th>
+                <th><i class="fa fa-paragraph fa-2x" aria-hidden="true"></i>Profession</th>
+                <th><i class="fa fa-calendar fa-2x" aria-hidden="true"></i>MeetingSchemaCreated</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.Name}} </td>
+                <td>{{user.Avtar}} </td>
+                <td>{{user.Profession}}</td>
+                <td>{{user.MeetingSchemaCreated}}</td>
+                <td>
+                    <!--List users -->
+                    <button [class="hidden" ]="AddNewUser()" class="btn btn-primary" (click)="AddNewUser()">
+                        <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>Add
+                    </button>
+                </td>
+                <td>
+                    <button [class.hidden]="!IsAddingNewUser" class="btn btn-danger" (click)="CancelCurrentUser()">
+                        <i class="fa fa-ban fa-2x" aria-hidden="true"></i>Cancel
+                    </button>
+                </td>
+                <td>
+                    <button>
+                        [user] = "user" (DeleteCurrentUser) = "DeletecurrentUser($event);" (CreateNewUser)="CreateNewUser($event);">
+                        <i class="fa fa-ban fa-2x" aria-hidden="true"></i> Delete
+                    </button>
+                </td>
+              </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Edit MeetingSchemas Data</title>
+</head>
+<body>
+    <form #EditMeetingSchemas="ngForm" *ngIf="meetingSchemasLoaded" novalidate>
+        <div class="alert alert-danger" [hidden]="editMeetingSchema.form.valid">
+            <ul *ngIf="Creator.dirty && !Creator.valid">
+                <li>The creator name is required</li>
+            </ul>
+            <ul *ngIf="Title.dirty && !Title.valid">
+                <li *ngIf="Title.errors.required">The title name is required</li>
+                <li *ngIf="Title.errors.pattern">Title should character types</li>
+            </ul>
+            <ul *ngIf="Description.dirty && !Description.valid">
+                <li *ngIf="Description.errors.required">Description is required</li>
+                <li *ngIf="Description.errors.pattern">Description should be character</li>
+            </ul>
+            <ul *ngIf="Location.dirty && !Location.valid">
+                <li *ngIf="Location.errors.required">Local is required</li>
+            </ul>
+        </div>
+
+        <button type="button" class="btn btn-danger" (click)="Back()">
+            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>Back to home
+        </button>
+        <button type="button" [disabled]="!editMeetingSchema.form.valid" class="btn btn-default" (click)="UpdateMeetingSchemasData(editMeetingSchema)">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update
+        </button>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label"><i class="fa fa-user" aria-hidden="true"></i>Creator</label>
+                    <input type="text" class="form-control" [(ngModel)]="meetingSchemaDetails.Creator" name="Creator" #Creator="ngModel" required pattern=".{5,30}"
+                           disabled />
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label"><i class="fa fa-text-width" aria-hidden="true"></i>Title</label>
+                    <input type="text" class="form-control" [(ngModel)]="meetingSchemaDetails.Title" name="Title" #Title="ngModel" required pattern=".{5,30}" />
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label"><i class="fa fa-paragraph" aria-hidden="true"></i>Description</label>
+                    <input type="text" class="form-control" [(ngModel)]="meetingSchemaDetails.Description" name="Description" #Description="ngModel" required pattern=".{10,}"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-6">
+                    <label class="control-label"><i class="fa fa-calendar-o" aria-hidden="true"></i>Time Start</label>
+                    <datepicker [(ngModel)]="meetingSchemDetails.TimeStart" name="TimeStartDate" [showWeeks]="false"></datepicker>
+                    <timepicker [(ngModel)]="meetingSchemaDetails.TimeEnd" name="TimeStartTime" (change)="changed()" [hourStep]="1" [minuteStep]="15" [showMeridian]="true"></timepicker>
+                </div>
+                <div class="col-xs-6">
+                    <label class="control-label"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Time End</label>
+                    <datepicker [(ngModel)]="meetingSchemaDetails.TimeEnd" name="TimeEndDate" [showWeeks]="false"></datepicker>
+                    <timepicker [(ngModel)]="meetingSchemaDetails.TimeEnd" name="TimeEndTime" (change)="changed()" [hourStep]="1" [minuteStep]="15" [showMeridian]="true"></timepicker>
+                </div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <div class="row">
+                <div class="col col-md-4">
+                    <label class="control-label"><i class="fa fa-map-marker" aria-hidden="true"></i> Location</label>
+                    <input type="text" class="form-control" [(ngModel)] ="meetingSchemaDetails.Location" name="Location" #Location required />
+                </div>
+                <div class="col col-md-4" selectContainer>
+                    <label class="control-label"><i class="fa fa-spinner" aria-hidden="true">Status</i></label>
+                    <select class="form-control" [(ngModel)] ="meetingSchemaDetails.Statuses" name="status" >
+                        <option *ngFor="let status of status" [value] ="status"> {{status}} </option>
+                    </select>
+                 <div class="col col-md-4" selectContainer>
+                  <label class="control-label"><i class="fa fa-tag" aria-hidden="true"></i></label>
+                     <select class="form-control" [(ngModel)] ="meetingSchemaDetails.Types" name="types">
+                        <option *ngFor="let type of  types " [value] ="types" {{Typed}}></option>
+                     </select>
+                 </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+
+        <!--Create the panel -->
+        <div class="panel panel-info">
+            <div class="page-header"> Participants of meetings</div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><i class="fa fa-user"></i>Name</th>
+                        <th><i class="fa fa-graduation-cap"></i>Profession</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let participants of meetingSchemaDetails">
+                        <td [style.valign]="'middle'">
+                            <img class="img-thumbnail img-small" src="../app/images/icons-user.png" alt="participants.name" />
+                        </td>
+                        <td [style.align]="center"> participants.Name </td>
+                        <td [style.align]="center"> Participants.Profession</td>
+                        <td [style.align="center"]>
+                         <button type="button" class="btn btn-danger btn-sm" (click)="DeleteParicipants(participants)"><i class="fa fa-user-times" aria-haspopup="true"></i>
+                            Delete
+                          </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+ </form>
+</body>
+</html>
