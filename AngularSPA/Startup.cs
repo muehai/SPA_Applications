@@ -52,7 +52,7 @@ namespace AngularSPA
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IParticipantsRepository, ParticipantsReopsitory>();
 
-            //Automapper configuration for DI
+            //Automapper configuration for mapping data to viewmodels
             AutoMapperConfiguration.Configure();
 
             //Enable Cors CIL
