@@ -23,6 +23,15 @@ namespace MeetingSchema.Data
 
         public MeetingSchemaContext(DbContextOptions<MeetingSchemaContext> options) : base(options) { }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+
+                optionsBuilder.UseSqlServer(@"Server=muehai\SqlExpress;Database=MeetingSchemaDb; Integrated Security=True; MultipleActiveResultSets=true");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
